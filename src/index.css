@@ -3,3 +3,26 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+
+
+.search-bar-instructions {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.ticket-list {
+  margin-top: 20px;
+}
+
+.ticket-list-header {
+  text-align: center;
+}
+
+.ticket-list-item {
+  cursor: pointer;
+}
+
+.ticket-list-item:select {
+  background-color: #efefef;
+}
