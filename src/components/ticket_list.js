@@ -1,31 +1,39 @@
-import React from 'react';
+import React, { Component } from 'react';
 import TicketListItem from './ticket_list_item';
 
-const TicketList = ({licensePlate, tickets, selectedTicket, onTicketSelect}) => {
-  if (!licensePlate) {
-    return <div></div>;
-  }
-  if (tickets.length === 0) {
-    return <h3> No tickets for {licensePlate}</h3>
+class TicketList extends Component {
+  constructor(props) {
+    super(props)
   }
 
-  const ticketItems = tickets.map((ticket) => {
+  ticketItems() {
+    const ticketItems = this.props.tickets.map((ticket) => {
+      return (
+        <TicketListItem
+          onTicketSelect={this.props.onTicketSelect}
+          key={ticket.summons_number}
+          ticket={ticket}
+          selectedTicket={this.props.selectedTicket}
+        />
+      );
+    });
+    return ticketItems;
+  }
+
+  render() {
+    if (!this.props.licensePlate) {
+      return <div></div>;
+    }
+    if (this.props.tickets.length === 0) {
+      return <h3> No tickets for {this.props.licensePlate}</h3>
+    }
     return (
-      <TicketListItem
-        onTicketSelect={onTicketSelect}
-        key={ticket.summons_number}
-        ticket={ticket}
-        selectedTicket={selectedTicket}
-      />
+      <div className="ticket-list">
+        <h3 className="ticket-list-header">Tickets for {this.props.licensePlate}</h3>
+        <div className="list-group">{this.ticketItems()}</div>
+      </div>
     );
-  });
-
-  return (
-    <div className="ticket-list">
-      <h3 className="ticket-list-header">Tickets for {licensePlate}</h3>
-      <div className="list-group">{ticketItems}</div>
-    </div>
-  );
-};
+  }
+}
 
 export default TicketList;
