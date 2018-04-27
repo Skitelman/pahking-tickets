@@ -23,11 +23,16 @@ class SearchBar extends Component {
     );
   }
 
+  sanitizeInput(input) {
+    return input.replace(/\W+/gi, "").toUpperCase();
+  }
+
   onInputEnter(event) {
     if (event.key === 'Enter' ) {
       this.props.resetSelectedTicket();
-      this.setState({licensePlate: event.target.value});
-      this.props.onSearchEnter(event.target.value.toUpperCase());
+      const plate = this.sanitizeInput(event.target.value);
+      this.setState({licensePlate: plate});
+      this.props.onSearchEnter(plate);
     };
   }
 };
