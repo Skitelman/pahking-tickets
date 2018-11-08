@@ -21,6 +21,9 @@ class TicketList extends Component {
   }
 
   render() {
+    if (this.props.loadingTickets) {
+      return <div>Loading Tickets ...</div>
+    }
     if (!this.props.licensePlate) {
       return <div></div>;
     }
